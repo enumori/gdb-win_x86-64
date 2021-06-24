@@ -106,7 +106,7 @@ static int tcap_initialized;
 #  if defined (__EMX__) || defined (NEED_EXTERN_PC)
 extern 
 #  endif /* __EMX__ || NEED_EXTERN_PC */
-char PC, *BC, *UP;
+extern char PC, *BC, *UP;
 #endif /* !__linux__ && !NCURSES_VERSION */
 
 /* Some strings to control terminal actions.  These are output by tputs (). */
@@ -653,7 +653,7 @@ _rl_backspace (int count)
 {
   register int i;
 
-#ifndef __MSDOS__
+#if !defined (__MSDOS__) && !defined (__MINGW32__)
   if (_rl_term_backspace)
     for (i = 0; i < count; i++)
       tputs (_rl_term_backspace, 1, _rl_output_character_function);
